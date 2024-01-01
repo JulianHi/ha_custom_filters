@@ -252,7 +252,18 @@ def to_ascii_json(string):
     """Convert string to ASCII JSON"""
     return json.dumps(string, ensure_ascii=False)
 
+## -- finder_T5
+def finder_T5(string):
+    """Convert sring to Finder T5 Value"""
 
+    # Convert decimal string to an integer
+    decimal_value = int(string)
+
+    # Extract the 8-bit exponent value and the 24-bit measurement
+    exponent_value = (decimal_value >> 24) & 0xFF
+    measurement_value = decimal_value & 0xFFFFFF
+
+    return measurement_value *10**exponent_value
 
 def init(*args):
     """Initialize filters"""
@@ -293,6 +304,7 @@ def init(*args):
     env.globals["ternary"] = ternary
     env.globals["shuffle"] = shuffle
     env.globals["to_ascii_json"] = to_ascii_json
+    env.globals["finder_T5"] = finder_T5
     return env
 
 
@@ -333,6 +345,7 @@ template._NO_HASS_ENV.globals["reach"] = reach
 template._NO_HASS_ENV.globals["ternary"] = ternary
 template._NO_HASS_ENV.globals["shuffle"] = shuffle
 template._NO_HASS_ENV.globals["to_ascii_json"] = to_ascii_json
+template._NO_HASS_ENV.globals["finder_T5"] = finder_T5
 
 
 async def async_setup(hass, hass_config):
@@ -355,4 +368,5 @@ async def async_setup(hass, hass_config):
     tpl._env.globals = ternary
     tpl._env.globals = shuffle
     tpl._env.globals = to_ascii_json
+    tpl._env.globals = finder_T5
     return True
