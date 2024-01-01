@@ -253,7 +253,7 @@ def to_ascii_json(string):
     return json.dumps(string, ensure_ascii=False)
 
 ## -- finder_T5
-def finder_T5(string):
+def finder_t5(string):
     """Convert sring to Finder T5 Value"""
 
     # Convert decimal string to an integer
@@ -286,6 +286,8 @@ def init(*args):
     env.filters["ternary"] = ternary
     env.filters["shuffle"] = shuffle
     env.filters["to_ascii_json"] = to_ascii_json
+    env.filters["finder_t5"] = finder_t5
+
     env.globals["replace_all"] = replace_all
     env.globals["is_defined"] = is_defined
     env.globals["get_type"] = get_type
@@ -304,7 +306,7 @@ def init(*args):
     env.globals["ternary"] = ternary
     env.globals["shuffle"] = shuffle
     env.globals["to_ascii_json"] = to_ascii_json
-    env.globals["finder_T5"] = finder_T5
+    env.globals["finder_t5"] = finder_t5
     return env
 
 
@@ -327,6 +329,8 @@ template._NO_HASS_ENV.filters["reach"] = reach
 template._NO_HASS_ENV.filters["ternary"] = ternary
 template._NO_HASS_ENV.filters["shuffle"] = shuffle
 template._NO_HASS_ENV.filters["to_ascii_json"] = to_ascii_json
+template._NO_HASS_ENV.filters["finder_t5"] = finder_t5
+
 template._NO_HASS_ENV.globals["replace_all"] = replace_all
 template._NO_HASS_ENV.globals["is_defined"] = is_defined
 template._NO_HASS_ENV.globals["get_type"] = get_type
@@ -345,7 +349,7 @@ template._NO_HASS_ENV.globals["reach"] = reach
 template._NO_HASS_ENV.globals["ternary"] = ternary
 template._NO_HASS_ENV.globals["shuffle"] = shuffle
 template._NO_HASS_ENV.globals["to_ascii_json"] = to_ascii_json
-template._NO_HASS_ENV.globals["finder_T5"] = finder_T5
+template._NO_HASS_ENV.globals["finder_t5"] = finder_t5
 
 
 async def async_setup(hass, hass_config):
@@ -368,5 +372,5 @@ async def async_setup(hass, hass_config):
     tpl._env.globals = ternary
     tpl._env.globals = shuffle
     tpl._env.globals = to_ascii_json
-    tpl._env.globals = finder_T5
+    tpl._env.globals = finder_t5
     return True
