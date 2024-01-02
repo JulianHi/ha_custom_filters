@@ -15,7 +15,6 @@ _LOGGER = logging.getLogger(__name__)
 
 _TemplateEnvironment = template.TemplateEnvironment
 
-
 ## -- REPLACE ALL
 def replace_all(text, find, replace = ''):
     """Replace all provided values with replacement value(s)"""
@@ -287,7 +286,6 @@ def init(*args):
     env.filters["shuffle"] = shuffle
     env.filters["to_ascii_json"] = to_ascii_json
     env.filters["finder_t5"] = finder_t5
-
     env.globals["replace_all"] = replace_all
     env.globals["is_defined"] = is_defined
     env.globals["get_type"] = get_type
@@ -330,7 +328,6 @@ template._NO_HASS_ENV.filters["ternary"] = ternary
 template._NO_HASS_ENV.filters["shuffle"] = shuffle
 template._NO_HASS_ENV.filters["to_ascii_json"] = to_ascii_json
 template._NO_HASS_ENV.filters["finder_t5"] = finder_t5
-
 template._NO_HASS_ENV.globals["replace_all"] = replace_all
 template._NO_HASS_ENV.globals["is_defined"] = is_defined
 template._NO_HASS_ENV.globals["get_type"] = get_type
