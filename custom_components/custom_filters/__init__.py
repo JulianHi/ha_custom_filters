@@ -267,8 +267,11 @@ def finder_t5(string):
     # Extract the 8-bit exponent value and the 24-bit measurement
     exponent_value = 255 - 1 - ((decimal_value >> 24) & 0xFF)
     measurement_value = decimal_value & 0xFFFFFF
+    result = measurement_value *10**exponent_value
 
-    return measurement_value *10**exponent_value
+    _LOGGER.info("Custom function executed with result: %s", result)
+
+    return result
 
 def addFilters(env):
     env.filters["replace_all"] = replace_all
