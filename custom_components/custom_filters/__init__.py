@@ -260,7 +260,7 @@ def finder_t5(string):
     decimal_value = int(string)
 
     # Extract the 8-bit exponent value and the 24-bit measurement
-    exponent_value = (decimal_value >> 24) & 0xFF
+    exponent_value = 255 - 1 - ((decimal_value >> 24) & 0xFF)
     measurement_value = decimal_value & 0xFFFFFF
 
     return measurement_value *10**exponent_value
