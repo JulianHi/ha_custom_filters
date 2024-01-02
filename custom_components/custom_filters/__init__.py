@@ -9,6 +9,8 @@ import logging
 
 from random import Random, SystemRandom, shuffle
 from homeassistant.config_entries import SOURCE_IMPORT, ConfigEntry
+from homeassistant.core import HomeAssistant
+
 from homeassistant.helpers import template
 
 _LOGGER = logging.getLogger(__name__)
