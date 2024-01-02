@@ -8,10 +8,11 @@ import zlib
 import logging
 
 from random import Random, SystemRandom, shuffle
-
+from homeassistant.config_entries import SOURCE_IMPORT, ConfigEntry
 from homeassistant.helpers import template
 
 _LOGGER = logging.getLogger(__name__)
+DOMAIN = 'custom_filters'
 
 _TemplateEnvironment = template.TemplateEnvironment
 
@@ -315,7 +316,13 @@ template.TemplateEnvironment = init
 addFilters(template._NO_HASS_ENV)
 
 
-async def async_setup(hass, hass_config):
+async def async_setup(hass: HomeAssistant, yaml_config: ConfigType):
     tpl = template.Template("", template._NO_HASS_ENV.hass)
     addFilters(tpl._env)
+
+    if DOMAIN in yaml_config and not hass.config_entries.async_entries(DOMAIN):
+        hass.async_create_task(hass.config_entries.flow.async_init(
+            DOMAIN, context={'source': SOURCE_IMPORT}
+        ))
+
     return True
