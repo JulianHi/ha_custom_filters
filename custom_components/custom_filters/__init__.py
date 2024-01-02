@@ -312,7 +312,8 @@ def addFilters(env):
 
 def init(*args, **kwargs):
     """Initialize filters"""
-    _LOGGER.error("TEST")
+    _LOGGER.error("test")
+
     env = _TemplateEnvironment(*args, **kwargs)
     addFilters(env)
     return env
@@ -323,6 +324,7 @@ addFilters(_NO_HASS_ENV)
 
 
 async def async_setup(hass: HomeAssistant, yaml_config: ConfigType):
+    _LOGGER.error("test 1")
     for env in hass.data.values():
         if isinstance(env, TemplateEnvironment):
             addFilters(env)
@@ -338,6 +340,7 @@ async def async_setup(hass: HomeAssistant, yaml_config: ConfigType):
     return True
 
 async def async_setup_entry(hass: HomeAssistant, _: ConfigEntry):
+    _LOGGER.error("test 2")
     for env in hass.data.values():
         if isinstance(env, TemplateEnvironment):
             addFilters(env)
