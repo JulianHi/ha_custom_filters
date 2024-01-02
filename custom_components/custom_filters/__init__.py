@@ -12,12 +12,14 @@ from homeassistant.config_entries import SOURCE_IMPORT, ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.typing import ConfigType
 
-from homeassistant.helpers import template
+#from homeassistant.helpers import template
+from homeassistant.helpers.template import TemplateEnvironment, _NO_HASS_ENV
 
 _LOGGER = logging.getLogger(__name__)
 DOMAIN = 'custom_filters'
 
-_TemplateEnvironment = template.TemplateEnvironment
+#_TemplateEnvironment = template.TemplateEnvironment
+_TemplateEnvironment = TemplateEnvironment
 
 ## -- REPLACE ALL
 def replace_all(text, find, replace = ''):
