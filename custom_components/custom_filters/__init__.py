@@ -317,9 +317,9 @@ def init(*args, **kwargs):
     addFilters(env)
     return env
 
-
-template.TemplateEnvironment = init
-addFilters(template._NO_HASS_ENV)
+#_TemplateEnvironment
+_TemplateEnvironment = init
+addFilters(_NO_HASS_ENV)
 
 
 async def async_setup(hass: HomeAssistant, yaml_config: ConfigType):
