@@ -264,9 +264,7 @@ def finder_t5(string):
 
     return measurement_value *10**exponent_value
 
-def init(*args):
-    """Initialize filters"""
-    env = _TemplateEnvironment(*args)
+def addFilters(env):
     env.filters["replace_all"] = replace_all
     env.filters["is_defined"] = is_defined
     env.filters["get_type"] = get_type
@@ -305,69 +303,19 @@ def init(*args):
     env.globals["shuffle"] = shuffle
     env.globals["to_ascii_json"] = to_ascii_json
     env.globals["finder_t5"] = finder_t5
+
+def init(*args, **kwargs):
+    """Initialize filters"""
+    env = _TemplateEnvironment(*args, **kwargs)
+    addFilters(env)
     return env
 
 
 template.TemplateEnvironment = init
-template._NO_HASS_ENV.filters["replace_all"] = replace_all
-template._NO_HASS_ENV.filters["is_defined"] = is_defined
-template._NO_HASS_ENV.filters["get_type"] = get_type
-template._NO_HASS_ENV.filters["is_type"] = is_type
-template._NO_HASS_ENV.filters["inflate"] = inflate
-template._NO_HASS_ENV.filters["deflate"] = deflate
-template._NO_HASS_ENV.filters["decode_base64_and_inflate"] = decode_base64_and_inflate
-template._NO_HASS_ENV.filters["deflate_and_base64_encode"] = deflate_and_base64_encode
-template._NO_HASS_ENV.filters["decode_valetudo_map"] = decode_valetudo_map
-template._NO_HASS_ENV.filters["urldecode"] = urldecode
-template._NO_HASS_ENV.filters["strtolist"] = strtolist
-template._NO_HASS_ENV.filters["listify"] = listify
-template._NO_HASS_ENV.filters["get_index"] = get_index
-template._NO_HASS_ENV.filters["grab"] = grab
-template._NO_HASS_ENV.filters["reach"] = reach
-template._NO_HASS_ENV.filters["ternary"] = ternary
-template._NO_HASS_ENV.filters["shuffle"] = shuffle
-template._NO_HASS_ENV.filters["to_ascii_json"] = to_ascii_json
-template._NO_HASS_ENV.filters["finder_t5"] = finder_t5
-template._NO_HASS_ENV.globals["replace_all"] = replace_all
-template._NO_HASS_ENV.globals["is_defined"] = is_defined
-template._NO_HASS_ENV.globals["get_type"] = get_type
-template._NO_HASS_ENV.globals["is_type"] = is_type
-template._NO_HASS_ENV.globals["inflate"] = inflate
-template._NO_HASS_ENV.globals["deflate"] = deflate
-template._NO_HASS_ENV.globals["decode_base64_and_inflate"] = decode_base64_and_inflate
-template._NO_HASS_ENV.globals["deflate_and_base64_encode"] = deflate_and_base64_encode
-template._NO_HASS_ENV.globals["decode_valetudo_map"] = decode_valetudo_map
-template._NO_HASS_ENV.globals["urldecode"] = urldecode
-template._NO_HASS_ENV.globals["strtolist"] = strtolist
-template._NO_HASS_ENV.globals["listify"] = listify
-template._NO_HASS_ENV.globals["get_index"] = get_index
-template._NO_HASS_ENV.globals["grab"] = grab
-template._NO_HASS_ENV.globals["reach"] = reach
-template._NO_HASS_ENV.globals["ternary"] = ternary
-template._NO_HASS_ENV.globals["shuffle"] = shuffle
-template._NO_HASS_ENV.globals["to_ascii_json"] = to_ascii_json
-template._NO_HASS_ENV.globals["finder_t5"] = finder_t5
+addFilters(template._NO_HASS_ENV)
 
 
 async def async_setup(hass, hass_config):
     tpl = template.Template("", template._NO_HASS_ENV.hass)
-    tpl._env.globals = replace_all
-    tpl._env.globals = is_defined
-    tpl._env.globals = get_type
-    tpl._env.globals = is_type
-    tpl._env.globals = inflate
-    tpl._env.globals = deflate
-    tpl._env.globals = deflate_and_base64_encode
-    tpl._env.globals = decode_base64_and_inflate
-    tpl._env.globals = decode_valetudo_map
-    tpl._env.globals = urldecode
-    tpl._env.globals = strtolist
-    tpl._env.globals = listify
-    tpl._env.globals = get_index
-    tpl._env.globals = grab
-    tpl._env.globals = reach
-    tpl._env.globals = ternary
-    tpl._env.globals = shuffle
-    tpl._env.globals = to_ascii_json
-    tpl._env.globals = finder_t5
+    addFilters(tpl._env)
     return True
