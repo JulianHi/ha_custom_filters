@@ -327,8 +327,8 @@ async def async_setup(hass: HomeAssistant, yaml_config: ConfigType):
         if isinstance(env, TemplateEnvironment):
             addFilters(env)
 
-    tpl = template.Template("", template._NO_HASS_ENV.hass)
-    addFilters(tpl._env)
+    #tpl = template.Template("", template._NO_HASS_ENV.hass)
+    #addFilters(tpl._env)
 
     if DOMAIN in yaml_config and not hass.config_entries.async_entries(DOMAIN):
         hass.async_create_task(hass.config_entries.flow.async_init(
